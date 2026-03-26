@@ -34,7 +34,7 @@ Auto-detected from Windows Registry:
 
 ## Requirements
 
-- Windows 10/11 (x64)
+- **Windows 11** (x64)
 - A DAW with ARA support (Fender Studio Pro, Cubase, etc.)
 - An external audio editor
 
