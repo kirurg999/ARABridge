@@ -21,6 +21,7 @@ Auto-detected from Windows Registry:
 
 1. Download the latest `ARABridge_x.x.x_Setup.exe` from [Releases](https://github.com/kirurg999/ARABridge/releases)
 2. Run the installer (requires admin rights — installs to `C:\Program Files\Common Files\VST3\`)
+   > **Note:** Windows SmartScreen may show a warning. Click **"More info"** → **"Run anyway"**. This is normal for unsigned software.
 3. Restart your DAW
 
 ## Usage
