@@ -23,14 +23,13 @@ It was built to work around a Studio Pro bug that breaks iZotope's RX Connect, a
 
 Auto-detected from the Windows Registry:
 
-- iZotope RX 9–15 Audio Editor
-- iZotope RX 10 / 11 / 12 Connect (each installed version listed separately)
-- Steinberg SpectraLayers 10–15
-- Steinberg WaveLab 11–15
+- iZotope RX
+- Steinberg SpectraLayers
+- Steinberg WaveLab
 - Adobe Audition
 - MAGIX Sound Forge Pro
 - Audacity
-- Ocenaudio
+- ocenaudio
 - Any other editor via the Browse (**...**) button or `scan.ini`
 
 ## Installation
