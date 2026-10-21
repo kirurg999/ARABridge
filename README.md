@@ -134,26 +134,6 @@ Use `0 | 0` for editors without a version number in their name. RX Connect is de
 
 **Still stuck?** [Open an issue](https://github.com/kirurg999/ARABridge/issues/new/choose) with your DAW, editor and ARA Bridge versions, and a log file if you can.
 
-## FAQ
-
-**iZotope RX Connect doesn't work in Studio Pro / Studio One. What can I do?**
-Install ARA Bridge, add it to the audio event as an ARA plugin, and pick **RX 10, 11 or 12 Connect** from its dropdown. ARA Bridge hosts RX Connect itself, so Send and Send Back work as they should. Click **Apply** when the audio comes back from RX.
-
-**How do I send audio from Studio Pro or Cubase to iZotope RX Audio Editor and back?**
-Pick your RX Audio Editor version in ARA Bridge and click **Send to Editor**. RX opens with the audio; edit it and press Ctrl+S. The edited audio plays back in the DAW straight away. See [Usage](#usage).
-
-**Can I use SpectraLayers, WaveLab, Audition, Sound Forge or Audacity as an external editor?**
-Yes. Installed editors are detected automatically. Any other editor can be added with the Browse (**...**) button or in [`scan.ini`](#customizing-the-editor-list).
-
-**Does it work with PreSonus Studio One?**
-Fender Studio Pro is the new name for Studio One. ARA Bridge is tested with Studio Pro 8. Earlier Studio One versions with ARA support may work but are untested.
-
-**Does it change my original audio files?**
-ARA Bridge never overwrites your source files. Edits are kept in separate files and played back in place of the original, and **Revert changes** goes back to the original. Committing an edit (Render in Studio Pro, Make Extension Permanent or Bounce Selection in Cubase) is done by the DAW itself.
-
-**Is it free? Is there a Mac version?**
-It's free. Windows 11 x64 only.
-
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) or the [Releases](https://github.com/kirurg999/ARABridge/releases) page.
