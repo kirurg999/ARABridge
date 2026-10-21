@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kirurg999.github.io/ARABridge/sitemap.xml

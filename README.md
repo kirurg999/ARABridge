@@ -1,6 +1,6 @@
 # ARA Bridge
 
-**ARA Bridge** is a VST3/ARA plugin that sends audio from your DAW to an external audio editor and brings it back — seamlessly, with no real-time playback or bouncing required.
+**[ARA Bridge](https://kirurg999.github.io/ARABridge/)** is a VST3/ARA plugin that sends audio from your DAW to an external audio editor and brings it back — seamlessly, with no real-time playback or bouncing required.
 
 It was built to work around a Studio Pro bug that breaks iZotope's RX Connect, and it now works with many editors and with both Studio Pro (formerly PreSonus Studio One) and Cubase. Free, for Windows.
 

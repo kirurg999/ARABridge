@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARA Bridge — Edit Studio Pro &amp; Cubase audio in iZotope RX and other editors</title>
+<meta name="description" content="Free VST3/ARA plugin for Windows. Send audio from Fender Studio Pro (Studio One) or Cubase to iZotope RX, RX Connect, SpectraLayers, WaveLab, Audition or Audacity and hear the edit in your DAW instantly.">
+<link rel="canonical" href="https://kirurg999.github.io/ARABridge/">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARA Bridge">
+<meta property="og:title" content="ARA Bridge — edit DAW audio in iZotope RX and other editors">
+<meta property="og:description" content="Free VST3/ARA plugin for Fender Studio Pro and Cubase on Windows. Fixes RX Connect in Studio Pro.">
+<meta property="og:url" content="https://kirurg999.github.io/ARABridge/">
+<meta property="og:image" content="https://kirurg999.github.io/ARABridge/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ARA Bridge",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "Audio plugin (VST3 / ARA)",
+  "operatingSystem": "Windows 11 x64",
+  "softwareVersion": "1.0.20-beta",
+  "description": "VST3/ARA plugin that sends audio from Fender Studio Pro or Steinberg Cubase to an external audio editor such as iZotope RX, RX Connect, SpectraLayers, WaveLab, Adobe Audition, Sound Forge or Audacity, and plays the edited audio back in the DAW.",
+  "url": "https://kirurg999.github.io/ARABridge/",
+  "downloadUrl": "https://github.com/kirurg999/ARABridge/releases",
+  "screenshot": "https://kirurg999.github.io/ARABridge/img/studio-pro-full.webp",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Gunnar Ottenson" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "iZotope RX Connect doesn't work in Studio Pro / Studio One. What can I do?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Install ARA Bridge, add it to the audio event as an ARA plugin, and pick RX 10, 11 or 12 Connect from its dropdown. ARA Bridge hosts RX Connect itself, so Send and Send Back work as they should. Click Apply when the audio comes back from RX." } },
+    { "@type": "Question", "name": "How do I send audio from Studio Pro or Cubase to iZotope RX Audio Editor and back?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pick your RX Audio Editor version in ARA Bridge and click Send to Editor. RX opens with the audio; edit it and press Ctrl+S. The edited audio plays back in the DAW straight away." } },
+    { "@type": "Question", "name": "Can I use SpectraLayers, WaveLab, Audition, Sound Forge or Audacity as an external editor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Installed editors are detected automatically. Any other editor can be added with the Browse button or in scan.ini." } },
+    { "@type": "Question", "name": "Does it work with PreSonus Studio One?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Fender Studio Pro is the new name for Studio One. ARA Bridge is tested with Studio Pro 8. Earlier Studio One versions with ARA support may work but are untested." } },
+    { "@type": "Question", "name": "Does it change my original audio files?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ARA Bridge never overwrites your source files. Edits are kept in separate files and played back in place of the original, and Revert changes goes back to the original. Committing an edit (Render in Studio Pro, Make Extension Permanent or Bounce Selection in Cubase) is done by the DAW itself." } },
+    { "@type": "Question", "name": "Is ARA Bridge free? Is there a Mac version?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It's free. Windows 11 x64 only." } }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #f6f7fb; --surface: #ffffff; --text: #171a24; --muted: #5a6275; --border: #dfe3ec;
+  --blue: #3d6bff; --green: #23a845; --accent-text: #ffffff; --code: #eef1f7;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12141c; --surface: #1b1e29; --text: #eceef4; --muted: #9aa3b8; --border: #2b3040;
+    --blue: #6b8fff; --green: #5ad66a; --accent-text: #0d1a10; --code: #232736;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12141c; --surface: #1b1e29; --text: #eceef4; --muted: #9aa3b8; --border: #2b3040;
+  --blue: #6b8fff; --green: #5ad66a; --accent-text: #0d1a10; --code: #232736;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+a { color: var(--blue); }
+img { max-width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--border); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; color: var(--text); text-decoration: none; }
+.brand img { width: 32px; height: 32px; border: 0; border-radius: 7px; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+nav a:hover { color: var(--text); }
+.hero { padding: 40px 0 28px; text-align: center; }
+.hero h1 { font-size: clamp(30px, 5.5vw, 50px); line-height: 1.12; margin: 0 0 16px; letter-spacing: -0.02em; }
+.hero h1 .g { color: var(--green); }
+.hero p.lead { font-size: clamp(17px, 2.3vw, 20px); color: var(--muted); max-width: 720px; margin: 0 auto 28px; }
+.btn {
+  display: inline-block; background: var(--green); color: var(--accent-text); font-weight: 700;
+  padding: 14px 28px; border-radius: 10px; text-decoration: none; font-size: 18px;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn-sub { display: block; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.hero figure { margin: 36px auto 0; max-width: 1000px; }
+section { padding: 44px 0; border-top: 1px solid var(--border); }
+h2 { font-size: clamp(24px, 3.5vw, 32px); margin: 0 0 18px; letter-spacing: -0.01em; }
+h3 { font-size: 19px; margin: 0 0 6px; }
+.muted { color: var(--muted); }
+.steps { display: grid; gap: 28px; }
+.step { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.step .n { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff;
+  align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-right: 8px; }
+@media (min-width: 760px) {
+  .step { grid-template-columns: 300px 1fr; align-items: center; gap: 28px; }
+}
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+ul.ticks { list-style: none; padding: 0; margin: 0; }
+ul.ticks li { padding: 5px 0 5px 26px; position: relative; }
+ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+ol { padding-left: 22px; } ol li { margin: 4px 0; }
+code { background: var(--code); padding: 1px 6px; border-radius: 5px; font-size: 0.92em; overflow-wrap: anywhere; }
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+summary { font-weight: 600; cursor: pointer; }
+details p { margin: 10px 0 0; color: var(--muted); }
+.note { font-size: 15px; color: var(--muted); border-left: 3px solid var(--blue); padding: 4px 0 4px 12px; margin: 14px 0 0; }
+footer { border-top: 1px solid var(--border); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+@media (max-width: 520px) { nav a.opt { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><img src="img/icon-256.png" alt="" width="32" height="32">ARA Bridge</a>
+    <nav>
+      <a class="opt" href="#how">How it works</a>
+      <a class="opt" href="#faq">FAQ</a>
+      <a href="https://github.com/kirurg999/ARABridge">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Edit DAW audio in <span class="g">iZotope RX</span><br>and hear it back instantly</h1>
+    <p class="lead">ARA Bridge is a free VST3/ARA plugin for <strong>Fender Studio Pro</strong> (formerly Studio One) and <strong>Cubase</strong>. Send an audio event to RX, RX Connect, SpectraLayers, WaveLab or any editor, save, and the edit plays in your project — no export, no import, no bounce.</p>
+    <a class="btn" id="dl" href="https://github.com/kirurg999/ARABridge/releases/download/v1.0.20-beta/ARABridge_1.0.20-beta_Setup.exe">Download for Windows</a>
+    <span class="btn-sub" id="dl-sub">Version 1.0.20-beta · Windows 11 x64 · <a href="https://github.com/kirurg999/ARABridge/releases">all releases</a></span>
+    <figure>
+      <img src="img/studio-pro-full.webp" width="1600" height="642" alt="ARA Bridge open on an audio event in Fender Studio Pro, showing the edited waveform in green after iZotope RX">
+    </figure>
+  </div>
+
+  <section>
+    <h2>Why it exists</h2>
+    <p>iZotope's RX Connect is meant to send a clip from your DAW to RX Audio Editor and back. In Studio Pro it doesn't work reliably. ARA Bridge fixes that by hosting RX Connect itself — and it does the same round trip for every other editor too, in both Studio Pro and Cubase.</p>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <img src="img/plugin-original.webp" width="1000" height="317" alt="ARA Bridge editor dropdown listing RX 11, SpectraLayers 12 and RX 11 Connect" loading="lazy">
+        <div><h3><span class="n">1</span>Pick an editor and send</h3>
+        <p class="muted">Add ARA Bridge to an audio event, choose an editor from the list, and click <strong>Send to Editor</strong>. Installed editors are found automatically.</p></div>
+      </div>
+      <div class="step">
+        <img src="img/rx-send-back.webp" width="1400" height="578" alt="iZotope RX Audio Editor with the clip from the DAW and the Send Back button" loading="lazy">
+        <div><h3><span class="n">2</span>Edit and save</h3>
+        <p class="muted">Repair, de-noise or edit in your editor, then save with Ctrl+S — or click <strong>Send Back</strong> in RX Connect and <strong>Apply</strong> in ARA Bridge. Save as often as you like.</p></div>
+      </div>
+      <div class="step">
+        <img src="img/plugin-edited.webp" width="1000" height="319" alt="ARA Bridge showing the edited waveform in green with the status Audio updated" loading="lazy">
+        <div><h3><span class="n">3</span>Play</h3>
+        <p class="muted">The edited audio plays in your DAW right away. The waveform turns green. Not happy? <strong>Revert changes</strong> brings back the original.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card"><h3>RX Connect that works</h3><p>Hosts RX 10, 11 and 12 Connect, so Send and Send Back work in Studio Pro.</p></div>
+      <div class="card"><h3>Any editor</h3><p>Auto-detects RX, SpectraLayers, WaveLab, Audition, Sound Forge, Audacity and ocenaudio. Add others with Browse.</p></div>
+      <div class="card"><h3>Instant playback</h3><p>Edits play back immediately — no real-time bounce or import step.</p></div>
+      <div class="card"><h3>Waveform and meters</h3><p>Stereo waveform preview, playback cursor and level meters inside the plugin.</p></div>
+      <div class="card"><h3>Per-region editing</h3><p>Sliced events are edited independently; revert affects only the current region.</p></div>
+      <div class="card"><h3>Saved with your project</h3><p>Edits are stored with the song and restored when you reopen it. Mixed sample rates are resampled automatically.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Compatibility</h2>
+    <div class="cols">
+      <div><h3>DAWs</h3>
+        <ul class="ticks">
+          <li>Fender Studio Pro (formerly PreSonus Studio One) — tested with 8</li>
+          <li>Steinberg Cubase Pro — tested with 15</li>
+        </ul></div>
+      <div><h3>Editors</h3>
+        <ul class="ticks">
+          <li>iZotope RX 9–15 Audio Editor</li>
+          <li>iZotope RX 10 / 11 / 12 Connect</li>
+          <li>Steinberg SpectraLayers 10–15</li>
+          <li>Steinberg WaveLab 11–15</li>
+          <li>Adobe Audition, MAGIX Sound Forge Pro</li>
+          <li>Audacity, ocenaudio, any other .exe</li>
+        </ul></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Install</h2>
+    <ol>
+      <li>Download the installer above and close your DAW.</li>
+      <li>Run <code>ARABridge_x.x.x_Setup.exe</code>. It installs to <code>C:\Program Files\Common Files\VST3\</code>.</li>
+      <li>Start your DAW. In <strong>Studio Pro</strong>, open ARA Bridge from the ARA plugin section of an audio event. In <strong>Cubase</strong>, add it via Audio &gt; Extensions.</li>
+    </ol>
+    <p class="note">Windows SmartScreen may warn about the installer because it isn't code-signed. Click <strong>More info</strong> → <strong>Run anyway</strong>.</p>
+    <p>Full usage notes and troubleshooting are in the <a href="https://github.com/kirurg999/ARABridge#readme">README</a>.</p>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details open><summary>iZotope RX Connect doesn't work in Studio Pro / Studio One. What can I do?</summary>
+      <p>Install ARA Bridge, add it to the audio event as an ARA plugin, and pick <strong>RX 10, 11 or 12 Connect</strong> from its dropdown. ARA Bridge hosts RX Connect itself, so Send and Send Back work as they should. Click <strong>Apply</strong> when the audio comes back from RX.</p></details>
+    <details><summary>How do I send audio from Studio Pro or Cubase to iZotope RX Audio Editor and back?</summary>
+      <p>Pick your RX Audio Editor version in ARA Bridge and click <strong>Send to Editor</strong>. RX opens with the audio; edit it and press Ctrl+S. The edited audio plays back in the DAW straight away.</p></details>
+    <details><summary>Can I use SpectraLayers, WaveLab, Audition, Sound Forge or Audacity as an external editor?</summary>
+      <p>Yes. Installed editors are detected automatically. Any other editor can be added with the Browse (…) button or in <code>%APPDATA%\ARABridge\scan.ini</code>.</p></details>
+    <details><summary>Does it work with PreSonus Studio One?</summary>
+      <p>Fender Studio Pro is the new name for Studio One. ARA Bridge is tested with Studio Pro 8. Earlier Studio One versions with ARA support may work but are untested.</p></details>
+    <details><summary>Does it change my original audio files?</summary>
+      <p>ARA Bridge never overwrites your source files. Edits are kept in separate files and played back in place of the original, and <strong>Revert changes</strong> goes back to the original. Committing an edit (Render in Studio Pro, Make Extension Permanent or Bounce Selection in Cubase) is done by the DAW itself.</p></details>
+    <details><summary>Is ARA Bridge free? Is there a Mac version?</summary>
+      <p>It's free. Windows 11 x64 only.</p></details>
+  </section>
+
+  <footer>
+    ARA Bridge by Gunnar Ottenson ·
+    <a href="https://github.com/kirurg999/ARABridge">GitHub</a> ·
+    <a href="https://github.com/kirurg999/ARABridge/blob/main/CHANGELOG.md">Changelog</a> ·
+    <a href="https://github.com/kirurg999/ARABridge/issues">Report a problem</a>
+    <br>iZotope, RX, Cubase, SpectraLayers, WaveLab and other product names are trademarks of their owners. ARA Bridge is not affiliated with them.
+  </footer>
+</div>
+<script>
+// Point the download button at the newest release (pre-releases included); the static link above is the fallback.
+fetch("https://api.github.com/repos/kirurg999/ARABridge/releases?per_page=1")
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(([rel]) => {
+    const exe = rel && rel.assets.find(a => a.name.endsWith(".exe"));
+    if (!exe) return;
+    document.getElementById("dl").href = exe.browser_download_url;
+    document.getElementById("dl-sub").firstChild.nodeValue =
+      "Version " + rel.tag_name.replace(/^v/, "") + " · Windows 11 x64 · ";
+  })
+  .catch(() => {});
+</script>
+</body>
+</html>
