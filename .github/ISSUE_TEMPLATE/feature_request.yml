@@ -1,0 +1,14 @@
+name: Feature or editor request
+description: Suggest an improvement or ask for a DAW/editor to be supported
+labels: [enhancement]
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: What would you like?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What would it help you do?
